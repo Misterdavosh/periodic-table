@@ -1,0 +1,115 @@
+:root {
+    --bg: #0d1117;
+    --card-bg: #161b22;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --radius: 8px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+  header { text-align: center; margin-bottom: 28px; }
+  header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #f85149, #ffa657, #ffd43b, #63e6be, #74c0fc, #b197fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  header p { color: var(--muted); margin-top: 6px; font-size: 0.9rem; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 16px;
+    margin: 0 auto 24px; max-width: 900px; font-size: 0.75rem;
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
+  .legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+
+  .table-wrap { overflow-x: auto; padding: 24px; }
+  #periodic-table {
+    display: grid;
+    grid-template-columns: repeat(18, minmax(64px, 1fr));
+    gap: 6px;
+    min-width: 1180px;
+    margin: 0 auto;
+  }
+  @media (min-width: 1228px) {
+    #periodic-table { min-width: 0; }
+  }
+  .element {
+    grid-column: var(--col);
+    grid-row: var(--row);
+    background: var(--card-bg);
+    border: 1px solid #30363d;
+    border-radius: var(--radius);
+    border-top: 4px solid var(--cat-color);
+    padding: 6px 6px 5px;
+    cursor: pointer;
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 74px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, z-index 0s;
+    user-select: none;
+  }
+  .element:hover {
+    transform: scale(1.18) translateY(-4px);
+    z-index: 10;
+    background: color-mix(in srgb, var(--cat-color) 25%, var(--card-bg));
+    box-shadow: 0 0 0 2px var(--cat-color), 0 12px 28px rgba(0,0,0,0.6);
+  }
+  .element:active { transform: scale(1.05); }
+  .element .num {
+    position: absolute; top: 4px; left: 7px;
+    font-size: 0.62rem; color: var(--muted); font-weight: 600;
+  }
+  .element .symbol {
+    font-size: 1.35rem; font-weight: 700; color: var(--cat-color);
+    line-height: 1.1;
+    transition: font-size 0.15s ease;
+  }
+  .element:hover .symbol { font-size: 1.55rem; }
+  .element .name {
+    font-size: 0.56rem; color: var(--text); margin-top: 3px;
+    text-align: center; opacity: 0.85; max-width: 100%;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 95%;
+  }
+  .element .mass { font-size: 0.52rem; color: var(--muted); margin-top: 1px; }
+
+  .placeholder { visibility: hidden; }
+
+  .tooltip {
+    position: fixed;
+    pointer-events: none;
+    background: #1c2129;
+    border: 1px solid var(--cat-color, #30363d);
+    border-radius: 10px;
+    padding: 12px 14px;
+    min-width: 220px;
+    max-width: 260px;
+    box-shadow: 0 14px 34px rgba(0,0,0,0.65);
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+  .tooltip.visible { opacity: 1; transform: translateY(0); }
+  .tooltip h3 { font-size: 1.1rem; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .tooltip h3 .sym { color: var(--cat-color); font-size: 1.4rem; }
+  .tooltip .cat {
+    display: inline-block; font-size: 0.66rem; color: #0d1117;
+    background: var(--cat-color); padding: 2px 8px; border-radius: 20px;
+    margin: 5px 0 8px; font-weight: 600;
+  }
+  .tooltip table { width: 100%; font-size: 0.76rem; border-collapse: collapse; }
+  .tooltip td { padding: 2px 0; vertical-align: top; }
+  .tooltip td:first-child { color: var(--muted); padding-right: 10px; white-space: nowrap; }
+  .tooltip td:last-child { text-align: right; }
+  .tooltip .hint { margin-top: 8px; font-size: 0.66rem; color: var(--muted); font-style: italic; }
+
+  footer { text-align: center; margin-top: 20px; color: var(--muted); font-size: 0.75rem; }
